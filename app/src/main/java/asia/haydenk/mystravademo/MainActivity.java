@@ -61,6 +61,7 @@ public class MainActivity extends android.app.Activity{
         params.put("client_id", String.valueOf(CLIENT_ID));
         params.put("client_secret", CLIENT_SECRET);
         params.put("code", code);
+        Log.d(TAG, "in getAccessToken");
         client.post(AUTHORIZE_URL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int code, JSONObject json) {

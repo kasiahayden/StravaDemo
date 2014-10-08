@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import asia.haydenk.mystravademo.fragments.SegmentsListFragment;
 import asia.haydenk.mystravademo.models.AthleteActivity;
 import asia.haydenk.mystravademo.models.Segment;
 
@@ -26,9 +27,10 @@ public class SegmentListActivity extends FragmentActivity {
     private AsyncHttpClient stravaClient;
     private String accessToken;
     private String TAG = "SegmentListActivity";
-    private ArrayList<Segment> segments;
+    private SegmentsListFragment fragmentSegmentsList;
+    /*private ArrayList<Segment> segments;
     private ArrayAdapter<Segment> aSegments;
-    private ListView lvSegments;
+    private ListView lvSegments;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +40,14 @@ public class SegmentListActivity extends FragmentActivity {
         Log.d(TAG, "getStringExtra accessToken: " + accessToken);
         stravaClient = new AsyncHttpClient();
 
-
-
-
-
-
+        fragmentSegmentsList = (SegmentsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_segments_list); //
 
         populateSegmentListActivity();
-        lvSegments = (ListView) findViewById(R.id.lvSegments);
-        segments = new ArrayList<Segment>();
-        aSegments = new ArrayAdapter<Segment>(this, android.R.layout.simple_list_item_1, segments);
+        //lvSegments = (ListView) findViewById(R.id.lvSegments);
+        /*segments = new ArrayList<Segment>();
+        aSegments = new ArrayAdapter<Segment>(this, android.R.layout.simple_list_item_1, segments);*/
         //aSegments = new SegmentArrayAdapter(this, segments);
-        lvSegments.setAdapter(aSegments);
+        //lvSegments.setAdapter(aSegments);
 
 
 
@@ -63,7 +61,8 @@ public class SegmentListActivity extends FragmentActivity {
             public void onSuccess(JSONArray json) {
                 Log.d(TAG, "SUCCESSFUL!!! populateSegmentListActivity");
                 ArrayList<Segment> segments = Segment.fromJSONArray(json);
-                aSegments.addAll(segments);
+                //aSegments.addAll(segments);
+                fragmentSegmentsList.addAll(segments);
                 for (int i = 0; i < segments.size(); i++) {
                     Log.d(TAG, "...segment... " + segments.get(i));
                 }

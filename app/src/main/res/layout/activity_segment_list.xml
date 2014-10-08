@@ -6,10 +6,10 @@ tools:context="asia.haydenk.mystravademo.SegmentListActivity">
 
 
     <fragment
+        android:name="asia.haydenk.mystravademo.fragments.SegmentsListFragment"
+        android:id="@+id/fragment_segments_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="asia.haydenk.mystravademo.fragments.SegmentsListFragment"
-        android:id="@+id/fragment"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
