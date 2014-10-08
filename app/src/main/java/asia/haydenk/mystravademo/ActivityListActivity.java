@@ -44,7 +44,8 @@ public class ActivityListActivity extends Activity {
         populateActivityListActivity();
         lvActivities = (ListView) findViewById(R.id.lvActivities);
         athleteActivities = new ArrayList<AthleteActivity>();
-        aAthleteActivities = new ArrayAdapter<AthleteActivity>(this, android.R.layout.simple_list_item_1, athleteActivities);
+        //aAthleteActivities = new ArrayAdapter<AthleteActivity>(this, android.R.layout.simple_list_item_1, athleteActivities);
+        aAthleteActivities = new AthleteActivityArrayAdapter(this, athleteActivities);
         lvActivities.setAdapter(aAthleteActivities);
 
 

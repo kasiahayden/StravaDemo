@@ -25,6 +25,7 @@ public class AthleteActivity implements Serializable {
     private String distance;
     private String elapsed_time;
     private String start_date_local;
+    private String total_elevation_gain;
     private ArrayList<Segment> segments;
     private Map map;
 
@@ -37,6 +38,7 @@ public class AthleteActivity implements Serializable {
             athleteActivity.distance = jsonObject.getString("distance"); //float, meters
             athleteActivity.elapsed_time = jsonObject.getString("elapsed_time"); //int, seconds
             athleteActivity.start_date_local = jsonObject.getString("start_date_local"); //time
+            athleteActivity.total_elevation_gain = jsonObject.getString("total_elevation_gain"); //float, meters
             //athleteActivity.segments = new ArrayList<Segment>(Segment.fromJSONArray(jsonObject.getJSONArray("segment_efforts"))); //TODO is this correct?
             athleteActivity.map = Map.fromJSON(jsonObject.getJSONObject("map"));
 
@@ -173,6 +175,10 @@ public class AthleteActivity implements Serializable {
 
     public String getStart_date_local() {
         return start_date_local;
+    }
+
+    public String getTotal_elevation_gain() {
+        return total_elevation_gain;
     }
 
     public ArrayList<Segment> getSegments() {
