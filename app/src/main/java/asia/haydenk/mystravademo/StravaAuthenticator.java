@@ -1,8 +1,5 @@
 package asia.haydenk.mystravademo;
 
-/**
- * Created by khayden on 10/4/14.
- */
 public class StravaAuthenticator {
 
     private int clientId;
@@ -59,5 +56,6 @@ public class StravaAuthenticator {
         url+=sb.toString();
         return url;
     }
+
 
 }

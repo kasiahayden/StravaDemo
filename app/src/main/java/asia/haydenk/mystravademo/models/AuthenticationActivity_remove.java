@@ -1,11 +1,10 @@
-package asia.haydenk.mystravademo;
+package asia.haydenk.mystravademo.models;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -14,7 +13,12 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 import asia.haydenk.mystravademo.StravaAuthenticator;
 
-public class MainActivity extends android.app.Activity{
+import asia.haydenk.mystravademo.R;
+
+/**
+ * Created by khayden on 10/6/14.
+ */
+public class AuthenticationActivity_remove extends android.app.Activity {
     private static final int CLIENT_ID = 3171; // ENTER CLIENT ID
     private static final String CLIENT_SECRET = "30fb399fe606b53008531750d5cbb76223a6ed83"; // ENTER CLIENT SECRET
     private static final String AUTHORIZE_URL = "https://www.strava.com/oauth/token";
@@ -22,11 +26,13 @@ public class MainActivity extends android.app.Activity{
 
     private AsyncHttpClient client;
     private String accessToken = null;
-    private String TAG = "MainActivity";
+
+    private static String TAG = "AuthenticationActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         client = new AsyncHttpClient();
         if (getIntent().getData() != null) { // get access token
@@ -35,20 +41,16 @@ public class MainActivity extends android.app.Activity{
             getRequestCode();
         }
 
-
     }
-
-    /*public static JStravaV3 getRestClient(String accessToken) {
-        return new JStravaV3(accessToken);
-    }*/
-
 
     public void getRequestCode() {
         StravaAuthenticator auth = new StravaAuthenticator(CLIENT_ID, Uri.encode(CALLBACK_URI));
         String requestUrl = auth.getRequestAccessUrl("auto", false, true, "completed");
         Log.d("MainActivity", "requestUrl: " + requestUrl);
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(requestUrl));
+        Log.d(TAG, "in RequestCode, before startActivity");
         startActivity(i);
+        Log.d(TAG, "in RequestCode, after startActivity");
     }
 
     public void getAccessToken(Uri data) {
@@ -65,10 +67,6 @@ public class MainActivity extends android.app.Activity{
                 // Authenticated Request
                 //KMH sendExampleAuthenticatedRequest(accessToken);
                 //getRecentActivities(accessToken);
-                Intent i = new Intent(getApplicationContext(), ActivityListActivity.class);
-                i.putExtra("accessToken", accessToken);
-                Log.d(TAG, "putExtra accessToken: " + accessToken);
-                startActivity(i); // brings up the second activity
             }
 
             @Override
@@ -79,4 +77,19 @@ public class MainActivity extends android.app.Activity{
         Log.i("HELLO", getIntent().toString());
     }
 
+    public String getAccessToken(){ //should always be non-null because onCreate will populate
+        return accessToken;
+    }
+
+    public void sendExampleAuthenticatedRequest(String accessToken) {
+        // Add authentication header
+        client.addHeader("Authorization", "Bearer " + accessToken);
+        // Send authenticated request
+        client.get("https://www.strava.com/api/v3/athlete", new JsonHttpResponseHandler() {
+            public void onSuccess(int code, JSONObject json) {
+                String firstname = json.optString("firstname");
+                Toast.makeText(AuthenticationActivity_remove.this, firstname, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
