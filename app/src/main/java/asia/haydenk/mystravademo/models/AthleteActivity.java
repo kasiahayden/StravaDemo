@@ -39,7 +39,7 @@ public class AthleteActivity implements Serializable {
             athleteActivity.elapsed_time = jsonObject.getString("elapsed_time"); //int, seconds
             athleteActivity.start_date_local = jsonObject.getString("start_date_local"); //time
             athleteActivity.total_elevation_gain = jsonObject.getString("total_elevation_gain"); //float, meters
-            //athleteActivity.segments = new ArrayList<Segment>(Segment.fromJSONArray(jsonObject.getJSONArray("segment_efforts"))); //TODO is this correct?
+            athleteActivity.segments = Segment.fromJSONArray(jsonObject.getJSONArray("segment_efforts"));
             athleteActivity.map = Map.fromJSON(jsonObject.getJSONObject("map"));
 
         } catch (JSONException e) {

@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="asia.haydenk.mystravademo.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +31,10 @@ z
         <activity
             android:name="asia.haydenk.mystravademo.ActivityListActivity"
             android:label="@string/title_activity_activity_list" >
+        </activity>
+        <activity
+            android:name="asia.haydenk.mystravademo.SegmentListActivity"
+            android:label="@string/title_activity_segment_list" >
         </activity>
     </application>
 

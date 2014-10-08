@@ -6,13 +6,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import asia.haydenk.mystravademo.StravaAuthenticator;
+import asia.haydenk.mystravademo.models.AuthenticationActivity_remove;
 
 public class MainActivity extends android.app.Activity{
     private static final int CLIENT_ID = 3171; // ENTER CLIENT ID
@@ -63,9 +67,16 @@ public class MainActivity extends android.app.Activity{
                 accessToken = json.optString("access_token");
                 // NOTE: STORE access token in shared preferences to avoid logging in every time
                 // Authenticated Request
-                //KMH sendExampleAuthenticatedRequest(accessToken);
+                sendExampleAuthenticatedRequest(accessToken);
                 //getRecentActivities(accessToken);
-                Intent i = new Intent(getApplicationContext(), ActivityListActivity.class);
+
+
+                /*Intent i = new Intent(getApplicationContext(), ActivityListActivity.class);
+                i.putExtra("accessToken", accessToken);
+                Log.d(TAG, "putExtra accessToken: " + accessToken);
+                startActivity(i); // brings up the second activity*/
+
+                Intent i = new Intent(getApplicationContext(), SegmentListActivity.class);
                 i.putExtra("accessToken", accessToken);
                 Log.d(TAG, "putExtra accessToken: " + accessToken);
                 startActivity(i); // brings up the second activity
@@ -77,6 +88,30 @@ public class MainActivity extends android.app.Activity{
             }
         });
         Log.i("HELLO", getIntent().toString());
+    }
+
+
+    public void sendExampleAuthenticatedRequest(String accessToken) {
+        // Add authentication header
+        client.addHeader("Authorization", "Bearer " + accessToken);
+        // Send authenticated request
+        client.get("https://www.strava.com/api/v3/athlete", new JsonHttpResponseHandler() {
+            public void onSuccess(int code, JSONObject json) {
+                Log.d(TAG, "activity:" + json);
+                String firstname = json.optString("firstname");
+                Toast.makeText(MainActivity.this, firstname, Toast.LENGTH_SHORT).show();
+            }
+
+            public void onSuccess(int code, JSONArray json) {
+                for (int i = 0; i < json.length(); i++) {
+                    try {
+                        Log.d(TAG, "===== activity:" + json.get(i));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
 }

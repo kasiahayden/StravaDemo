@@ -9,5 +9,6 @@
     <string name="time">Time</string>
     <string name="distance">Distance</string>
     <string name="pace_or_elevation">Pace|Elevation</string>
+    <string name="title_activity_segment_list">SegmentListActivity</string>
 
 </resources>

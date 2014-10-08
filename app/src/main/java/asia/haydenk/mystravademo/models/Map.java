@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Map {
 
     private String id;
-    private String polyline;
-    private String summary_polyline;
+    private String polyline = null;
+    private String summary_polyline = null;
     private String resource_state; //int 1 - 3
 
 
@@ -21,9 +21,12 @@ public class Map {
         Map map = new Map();
         try {
             map.id = jsonObject.getString("id");
-            map.polyline = jsonObject.getString("polyline");
-            map.summary_polyline = jsonObject.getString("summary_polyline");
-            map.resource_state = jsonObject.getString("resource_state");
+            map.resource_state = jsonObject.getString("resource_state"); // 2 for activity, 3 for segment
+            if (map.resource_state == "2") {
+                map.summary_polyline = jsonObject.getString("summary_polyline"); // activity
+            } else if (map.resource_state == "3") {
+                map.polyline = jsonObject.getString("polyline"); // segment
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

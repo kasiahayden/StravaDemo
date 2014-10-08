@@ -1,7 +1,6 @@
 package asia.haydenk.mystravademo;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -17,6 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import asia.haydenk.mystravademo.models.AthleteActivity;
+import asia.haydenk.mystravademo.models.Segment;
 
 
 public class ActivityListActivity extends Activity {
@@ -60,6 +60,10 @@ public class ActivityListActivity extends Activity {
                 aAthleteActivities.addAll(athleteActivities);
                 for (int i = 0; i < athleteActivities.size(); i++) {
                     Log.d("ActivityListActivity", i + "::" + athleteActivities.get(i).getName());
+                    ArrayList<Segment> segments = athleteActivities.get(i).getSegments();
+                    for (int j = 0; j < segments.size(); j++) {
+                        Log.d(TAG, "........ " + segments.get(j).getName());
+                    }
                 }
             }
             public void onFailure(Throwable ex) {

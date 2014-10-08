@@ -22,7 +22,7 @@ public class Segment {
         try {
             segment.name = jsonObject.getString("name");
             segment.distance = jsonObject.getString("distance"); //float, meters
-            segment.map = Map.fromJSON(jsonObject.getJSONObject("map"));
+            //segment.map = Map.fromJSON(jsonObject.getJSONObject("map")); //TODO Maps not in a normal segment?
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
@@ -60,6 +60,11 @@ public class Segment {
 
     public Map getMap() {
         return map;
+    }
+
+    @Override
+    public String toString(){
+        return getName() + " :: " + getDistance();
     }
 
 }
