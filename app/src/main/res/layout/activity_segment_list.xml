@@ -5,8 +5,20 @@ android:layout_height="match_parent"
 tools:context="asia.haydenk.mystravademo.SegmentListActivity">
 
 
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"></FrameLayout>
+</RelativeLayout>
+
+    <!--
+
     <fragment
-        android:name="asia.haydenk.mystravademo.fragments.SegmentsListFragment"
+        android:name="asia.haydenk.mystravademo.fragments.NearbySegmentsFragment"
         android:id="@+id/fragment_segments_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,4 +27,9 @@ tools:context="asia.haydenk.mystravademo.SegmentListActivity">
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         tools:layout="@layout/fragment_segments_list" />
-</RelativeLayout>
+
+
+    android:name="asia.haydenk.mystravademo.fragments.StarredSegmentsFragment"
+    "asia.haydenk.mystravademo.fragments.SegmentsListFragment"
+
+     -->
