@@ -25,8 +25,6 @@ public class AthleteActivityArrayAdapter extends ArrayAdapter<AthleteActivity> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //return super.getView(position, convertView, parent);
-
         AthleteActivity athleteActivity = getItem(position);
         View v;
         if (convertView == null) {

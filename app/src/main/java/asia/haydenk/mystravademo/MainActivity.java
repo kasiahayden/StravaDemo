@@ -31,26 +31,21 @@ public class MainActivity extends android.app.Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         client = new AsyncHttpClient();
         if (getIntent().getData() != null) { // get access token
             getAccessToken(getIntent().getData());
         } else { // get request code
             getRequestCode();
         }
-
-
     }
 
     /*public static JStravaV3 getRestClient(String accessToken) {
         return new JStravaV3(accessToken);
     }*/
 
-
     public void getRequestCode() {
         StravaAuthenticator auth = new StravaAuthenticator(CLIENT_ID, Uri.encode(CALLBACK_URI));
         String requestUrl = auth.getRequestAccessUrl("auto", false, true, "completed");
-        Log.d("MainActivity", "requestUrl: " + requestUrl);
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(requestUrl));
         startActivity(i);
     }
@@ -61,26 +56,16 @@ public class MainActivity extends android.app.Activity{
         params.put("client_id", String.valueOf(CLIENT_ID));
         params.put("client_secret", CLIENT_SECRET);
         params.put("code", code);
-        Log.d(TAG, "in getAccessToken");
         client.post(AUTHORIZE_URL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int code, JSONObject json) {
                 accessToken = json.optString("access_token");
-                // NOTE: STORE access token in shared preferences to avoid logging in every time
+                // TODO: STORE access token in shared preferences to avoid logging in every time
                 // Authenticated Request
-                sendExampleAuthenticatedRequest(accessToken);
-                //getRecentActivities(accessToken);
-
-
-                /*Intent i = new Intent(getApplicationContext(), ActivityListActivity.class);
-                i.putExtra("accessToken", accessToken);
-                Log.d(TAG, "putExtra accessToken: " + accessToken);
-                startActivity(i); // brings up the second activity*/
-
                 Intent i = new Intent(getApplicationContext(), SegmentListActivity.class);
                 i.putExtra("accessToken", accessToken);
                 Log.d(TAG, "putExtra accessToken: " + accessToken);
-                startActivity(i); // brings up the second activity
+                startActivity(i);
             }
 
             @Override
@@ -90,29 +75,4 @@ public class MainActivity extends android.app.Activity{
         });
         Log.i("HELLO", getIntent().toString());
     }
-
-
-    public void sendExampleAuthenticatedRequest(String accessToken) {
-        // Add authentication header
-        client.addHeader("Authorization", "Bearer " + accessToken);
-        // Send authenticated request
-        client.get("https://www.strava.com/api/v3/athlete", new JsonHttpResponseHandler() {
-            public void onSuccess(int code, JSONObject json) {
-                Log.d(TAG, "activity:" + json);
-                String firstname = json.optString("firstname");
-                Toast.makeText(MainActivity.this, firstname, Toast.LENGTH_SHORT).show();
-            }
-
-            public void onSuccess(int code, JSONArray json) {
-                for (int i = 0; i < json.length(); i++) {
-                    try {
-                        Log.d(TAG, "===== activity:" + json.get(i));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
-
 }

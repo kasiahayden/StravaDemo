@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyStravaDemo</string>
+    <string name="app_name">Simple Strava Demo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_activity_list">ActivityListActivity</string>
@@ -9,7 +9,7 @@
     <string name="time">Time</string>
     <string name="distance">Distance</string>
     <string name="pace_or_elevation">Pace|Elevation</string>
-    <string name="title_activity_segment_list">SegmentListActivity</string>
+    <string name="title_activity_segment_list">Strava Segments</string>
     <string name="title_activity_map_test">MapTestActivity</string>
 
 </resources>
