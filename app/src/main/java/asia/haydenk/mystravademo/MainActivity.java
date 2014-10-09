@@ -31,17 +31,21 @@ public class MainActivity extends android.app.Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         client = new AsyncHttpClient();
         if (getIntent().getData() != null) { // get access token
             getAccessToken(getIntent().getData());
         } else { // get request code
             getRequestCode();
         }
+
+
     }
 
     /*public static JStravaV3 getRestClient(String accessToken) {
         return new JStravaV3(accessToken);
     }*/
+
 
     public void getRequestCode() {
         StravaAuthenticator auth = new StravaAuthenticator(CLIENT_ID, Uri.encode(CALLBACK_URI));
@@ -60,11 +64,12 @@ public class MainActivity extends android.app.Activity{
             @Override
             public void onSuccess(int code, JSONObject json) {
                 accessToken = json.optString("access_token");
-                // TODO: STORE access token in shared preferences to avoid logging in every time
+                // NOTE: STORE access token in shared preferences to avoid logging in every time
                 // Authenticated Request
+                sendExampleAuthenticatedRequest(accessToken);
+
                 Intent i = new Intent(getApplicationContext(), SegmentListActivity.class);
                 i.putExtra("accessToken", accessToken);
-                Log.d(TAG, "putExtra accessToken: " + accessToken);
                 startActivity(i);
             }
 
@@ -73,6 +78,30 @@ public class MainActivity extends android.app.Activity{
                 ex.printStackTrace();
             }
         });
-        Log.i("HELLO", getIntent().toString());
     }
+
+
+    public void sendExampleAuthenticatedRequest(String accessToken) {
+        // Add authentication header
+        client.addHeader("Authorization", "Bearer " + accessToken);
+        // Send authenticated request
+        client.get("https://www.strava.com/api/v3/athlete", new JsonHttpResponseHandler() {
+            public void onSuccess(int code, JSONObject json) {
+                Log.d(TAG, "activity:" + json);
+                String firstname = json.optString("firstname");
+                //Toast.makeText(MainActivity.this, firstname, Toast.LENGTH_SHORT).show();
+            }
+
+            public void onSuccess(int code, JSONArray json) {
+                for (int i = 0; i < json.length(); i++) {
+                    try {
+                        Log.d(TAG, "===== activity:" + json.get(i));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
 }

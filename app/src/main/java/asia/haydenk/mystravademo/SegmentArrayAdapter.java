@@ -27,6 +27,8 @@ public class SegmentArrayAdapter extends ArrayAdapter<Segment>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //return super.getView(position, convertView, parent);
+
         Segment segment = getItem(position);
         View v;
         if (convertView == null) {
@@ -35,13 +37,20 @@ public class SegmentArrayAdapter extends ArrayAdapter<Segment>{
         } else {
             v = convertView;
         }
+
         ImageView ivMap = (ImageView) v.findViewById(R.id.ivMap);
         TextView tvActivityName = (TextView) v.findViewById(R.id.tvActivityName);
+        TextView tvTime = (TextView) v.findViewById(R.id.tvTime);
         TextView tvDistance = (TextView) v.findViewById(R.id.tvDistance);
+        TextView tvPaceOrElevation = (TextView) v.findViewById(R.id.tvPaceOrElevation);
         int resId = android.R.color.transparent;
+
         ivMap.setImageResource(resId);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
         tvActivityName.setText(segment.getName());
         tvDistance.setText(segment.getDistance());
+
         return v;
     }
 }
