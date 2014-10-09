@@ -33,7 +33,7 @@ public class SegmentArrayAdapter extends ArrayAdapter<Segment>{
         View v;
         if (convertView == null) {
             LayoutInflater inflator = LayoutInflater.from(getContext());
-            v = inflator.inflate(R.layout.athlete_activity_item, parent, false);
+            v = inflator.inflate(R.layout.segment_item, parent, false);
         } else {
             v = convertView;
         }

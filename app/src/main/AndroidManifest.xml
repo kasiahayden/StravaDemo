@@ -3,18 +3,36 @@
     package="asia.haydenk.mystravademo" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--
+         The following two permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA8puuDbMf6-p78Y2hZafM2KTDdKUsmmO8" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="20" />
+
         <activity
             android:name="asia.haydenk.mystravademo.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-z
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -35,6 +53,10 @@ z
         <activity
             android:name="asia.haydenk.mystravademo.SegmentListActivity"
             android:label="@string/title_activity_segment_list" >
+        </activity>
+        <activity
+            android:name="asia.haydenk.mystravademo.MapTestActivity"
+            android:label="@string/title_activity_map_test" >
         </activity>
     </application>
 

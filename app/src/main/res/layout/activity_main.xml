@@ -10,16 +10,16 @@
     tools:context=".MainActivity">
 
 
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="testClick"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
-        android:onClick="testCall" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:onClick="testCall"
+        android:background="@drawable/strava_logo_cropped"
+        />
+
 
 
 </RelativeLayout>

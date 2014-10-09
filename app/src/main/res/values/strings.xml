@@ -10,5 +10,6 @@
     <string name="distance">Distance</string>
     <string name="pace_or_elevation">Pace|Elevation</string>
     <string name="title_activity_segment_list">SegmentListActivity</string>
+    <string name="title_activity_map_test">MapTestActivity</string>
 
 </resources>

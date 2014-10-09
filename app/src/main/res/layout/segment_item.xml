@@ -1,7 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginBottom="20dp">
 
     <ImageView
         android:id="@+id/ivMap"
@@ -17,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivMap"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
         android:text="@string/activity_name" />
 
     <TextView
@@ -25,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvActivityName"
         android:layout_toRightOf="@+id/ivMap"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBottom="@+id/ivMap"
         android:text="@string/distance" />
 
 </RelativeLayout>
