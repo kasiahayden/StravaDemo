@@ -43,7 +43,7 @@
 
                 <data
                     android:host="haydenk.asia"
-                    android:scheme="http" />
+                    android:scheme="oauth" />
             </intent-filter>
         </activity>
         <activity

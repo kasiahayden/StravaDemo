@@ -15,14 +15,12 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import asia.haydenk.mystravademo.StravaAuthenticator;
-import asia.haydenk.mystravademo.models.AuthenticationActivity_remove;
 
 public class MainActivity extends android.app.Activity{
     private static final int CLIENT_ID = 3171; // ENTER CLIENT ID
     private static final String CLIENT_SECRET = "30fb399fe606b53008531750d5cbb76223a6ed83"; // ENTER CLIENT SECRET
     private static final String AUTHORIZE_URL = "https://www.strava.com/oauth/token";
-    private static final String CALLBACK_URI = "http://haydenk.asia"; //http://strava.android
+    private static final String CALLBACK_URI = "oauth://haydenk.asia"; //"http://haydenk.asia"; //http://strava.android
 
     private AsyncHttpClient client;
     private String accessToken = null;
@@ -50,6 +48,7 @@ public class MainActivity extends android.app.Activity{
     public void getRequestCode() {
         StravaAuthenticator auth = new StravaAuthenticator(CLIENT_ID, Uri.encode(CALLBACK_URI));
         String requestUrl = auth.getRequestAccessUrl("auto", false, true, "completed");
+        Log.d(TAG, "requestUrl == " + requestUrl);
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(requestUrl));
         startActivity(i);
     }
